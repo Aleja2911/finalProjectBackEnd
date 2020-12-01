@@ -48,7 +48,25 @@ const scientistController ={
     .query("DELETE FROM scientist WHERE id=$1 RETURNING *", [id])
     .then((data) => res.send('scientist row has been deleted'))
     .catch((err) => console.log(err))
+  },
+
+  getPrograms: (req, res) => {
+    console.log('hello program')
+    const query = `
+    SElECT *
+    FROM scientist s
+    JOIN scientist_has_program shp
+    ON s.id = shp.scientist_id
+    JOIN university_program up
+    ON up.id = shp.program_id
+    `
+
+    client
+    .query(query)
+    .then((data) => res.json(data.rows))
+    .catch((err) => console.log(err))
   }
+
 }
 
 
