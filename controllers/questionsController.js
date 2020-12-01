@@ -35,7 +35,26 @@ const questionsController ={
       .query("DELETE FROM questions WHERE id=$1 RETURNING *", [id])
       .then((data) => res.json(data.rows))
       .catch((err) => console.log(err))
+    },
+
+    getScientists: (req, res) => {
+      console.log('hello science')
+      const query = `
+      SElECT *
+      FROM questions q
+      JOIN scientist_has_question shq
+      ON q.id = shq.question_id
+      JOIN scientist s
+      ON s.id = shq.scientist_id
+      `
+
+      client
+      .query(query)
+      .then((data) => res.json(data.rows))
+      .catch((err) => console.log(err))
     }
+
+
 }
 
 module.exports = questionsController;

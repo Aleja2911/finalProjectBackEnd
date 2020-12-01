@@ -26,6 +26,92 @@ module.exports.seedPart1 = async (req, res, next) => {
   }
 };
 
+module.exports.scientistHasQuestion = async (req, res, next) => {
+  const shqQuery = `
+    INSERT INTO scientist_has_question (scientist_id, question_id) VALUES
+    (1, 1),
+    (2, 1),
+    (8, 1),
+    (10, 1),
+    (12, 2),
+    (14, 2),
+    (18, 2),
+    (35, 2),
+    (2, 3),
+    (9, 3),
+    (13, 3),
+    (15, 3),
+    (16, 3),
+    (20, 3),
+    (23, 3),
+    (37, 3),
+    (39, 3),
+    (41, 3),
+    (42, 3),
+    (44, 3),
+    (9, 4),
+    (44, 4),
+    (3, 5),
+    (4, 5),
+    (5, 5),
+    (6, 5),
+    (15, 5),
+    (16, 5),
+    (17, 5),
+    (20, 5),
+    (23, 5),
+    (24, 5),
+    (39, 5),
+    (40, 5),
+    (41, 5),
+    (42, 5),
+    (43, 5),
+    (45, 5),
+    (46, 5),
+    (47, 5),
+    (48, 5),
+    (50, 5),
+    (7, 6),
+    (19, 6),
+    (21, 6),
+    (22, 6),
+    (25, 6),
+    (27, 6),
+    (28, 6),
+    (29, 6),
+    (30, 6),
+    (52, 6),
+    (53, 6),
+    (48, 7),
+    (3, 8),
+    (28, 8),
+    (32, 8),
+    (33, 8),
+    (36, 8),
+    (38, 8),
+    (44, 8),
+    (21, 9),
+    (22, 9),
+    (25, 9),
+    (26, 9),
+    (27, 9),
+    (34, 10),
+    (49, 10),
+    (51, 10),
+    (54, 10),
+    (11, 11),
+    (13, 11)
+    RETURNING *;
+`;
+  try {
+    const {rows} = await db.query(shqQuery);
+    res.status(201).json(rows)
+} 
+  catch (e) {
+    console.log({ shqSeedError: e.message });
+  }
+};
+
 
 module.exports.seedPart2 = async (req, res, next) => {
      // Scientist query
@@ -85,7 +171,7 @@ module.exports.seedPart2 = async (req, res, next) => {
       ('May-Britt',	'Moser',	'Neuroscientist and Psychologist',	'{"Medicine", "Neurobiology"}', '{"Medicine"}',	'https://en.wikipedia.org/wiki/May-Britt_Moser', 'https://www.nobelprize.org/images/may-britt-moser-15191-portrait-medium.jpg'),
       ('Françoise',	'Barré-Sinoussi',	'Virologist',	'{"Medicine", "Biology"}',	'{"Medicine"}',	'https://en.wikipedia.org/wiki/May-Britt_Moser',	'https://www.nobelprize.org/images/may-britt-moser-15191-portrait-medium.jpg'),
       ('Frances',	'Hamilton Arnold',	'Chemical Engineer',	'{"Chemistry", "Engineering"}',	'{"Medicine", "Alternative energies"}',	'https://en.wikipedia.org/wiki/Frances_Arnold',	'https://www.mediatheque.lindau-nobel.org/Content/Assets/Medium/38459___arnold_frances_h_chemistry.jpg'),
-      ('Valentina',	'Vladimirovna Tereshkova',	'Engineer and Former Cosmonaut',	'{"Engineering"}',	'{"Space science"}',	'https://en.wikipedia.org/wiki/Valentina_Tereshkova',	'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Valentina_Tereshkova_%28January_1963%29.jpg/170px-Valentina_Tereshkova_%28January_1963%29.jpg'),
+      ('Valentina',	'Vladimirovna Tereshkova',	'Engineer and Former Cosmonaut',	'{"Engineering"}',	'{"Planetary Science"}',	'https://en.wikipedia.org/wiki/Valentina_Tereshkova',	'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Valentina_Tereshkova_%28January_1963%29.jpg/170px-Valentina_Tereshkova_%28January_1963%29.jpg'),
       ('Brenda',	'Milner',	'Neuropsychologist',	'{"Medicine", "Neurobiology"}',	'{"Medicine"}',	'https://en.wikipedia.org/wiki/Brenda_Milner',	'https://www.balzan.org/upload/qtasccrbvnb42mm2a1qzl4ce201302201624Milner.jpg'),
       ('Katherine',	'Johnson',	'Mathematician',	'{"Mathematics"}',	'{"Planetary Science"}',	'https://en.wikipedia.org/wiki/Katherine_Johnson',	'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Katherine_Johnson_1983.jpg/220px-Katherine_Johnson_1983.jpg'),
       ('Mary', 	'Jackson',	'Mathematician and Aerospace Engineer',	'{"Engineering"}',	'{"Understanding the universe"}',	'https://en.wikipedia.org/wiki/Mary_Jackson_(engineer)',	'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Mary_Jackson_1979_Portrait_%28LRC-1979-B701_P-07085%29.jpg/220px-Mary_Jackson_1979_Portrait_%28LRC-1979-B701_P-07085%29.jpg'),
