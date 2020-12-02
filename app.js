@@ -1,6 +1,7 @@
 require('dotenv').config();
 require('./client');
 
+const cors = require('cors');
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -21,6 +22,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
