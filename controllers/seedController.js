@@ -21,7 +21,7 @@ CREATE TABLE "scientist" (
 	"issue_tackled" varchar(1000) ARRAY  NOT NULL,
 	"wiki_link" varchar(1000) NOT NULL,
 	"picture" varchar(1000) NOT NULL,
-	"short_description" varchar (400),
+	"short_description" varchar (4000),
 	CONSTRAINT "scientist_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
